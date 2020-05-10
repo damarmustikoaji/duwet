@@ -108,3 +108,6 @@ python gmail_sign_in_test.py
 
 ## Contact
 - Please dm ig @damarresin
+
+## Reference
+https://www.youtube.com/watch?v=lvFAuUcowT4&t=61s
