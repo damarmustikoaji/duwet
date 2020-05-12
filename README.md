@@ -59,6 +59,13 @@ BROWSER=chrome
 
 Change the BROWSER to "chrome" or "firefox"
 
+You can change the geolocation on the browser, just change on this env
+
+```
+LATITUDE=-7.761967
+LONGITUDE=110.409268
+```
+
 ## Setup Browser
 Go to `features > environment.py`
 
