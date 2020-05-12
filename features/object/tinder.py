@@ -19,3 +19,5 @@ class object_repository:
     buttonNotInterest3  = '//button[contains(text(), "Not interested")]'
     modalNotInterest    = '//div[@class="Bdrs(8px) Ov(h) Ta(c) Bgc(#fff) M(10px) W(100%)--s Miw(300px) W(300px)"]'
     buttonAddHome       = '//button[@data-testid="addToHomeScreen"]'
+    buttonNoThanks      = '//button[contains(text(), "No Thanks")]'
+    ModalUnlimited      = '//div[@class="modal-zoom-in StretchedBox CenterAlign Z(1)"]'

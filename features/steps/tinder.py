@@ -1,4 +1,5 @@
 from behave import given, when, then
+from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
@@ -129,6 +130,7 @@ def step_impl(context):
 @when('I click the Like button')
 def step_impl(context):
     keepGoing = True
+    swipe = 0
     while keepGoing:
         time.sleep(1)
         try:
@@ -137,12 +139,23 @@ def step_impl(context):
             context.browser.refresh()
             keepGoing = True
         except TimeoutException:
+            buttonLike = WebDriverWait(context.browser, 3).until(EC.element_to_be_clickable((By.XPATH, obj.buttonLike)))
+            #context.browser.find_element_by_xpath(obj.buttonLike).click()
             try:
-                buttonLike = WebDriverWait(context.browser, 3).until(EC.element_to_be_clickable((By.XPATH, obj.buttonLike)))
-                #context.browser.find_element_by_xpath(obj.buttonLike).click()
                 buttonLike.click()
-                print("swipe")
+                swipe = swipe + 1
+                print(swipe)
                 keepGoing = True
-            except TimeoutException:
-                context.browser.refresh()
-                keepGoing = True
+            except ElementClickInterceptedException:
+                if context.browser.find_element_by_xpath(obj.ModalUnlimited).is_displayed():
+                    webdriver.ActionChains(context.browser).send_keys(Keys.ESCAPE).perform()
+                    print("you're out of like")
+                    keepGoing = True
+        except NoSuchElementException:
+            context.browser.refresh()
+            keepGoing = True
+
+@given('I time sleep "{input}" s')
+def step_impl(context, input):
+    print(int(input))
+    time.sleep(int(input))
