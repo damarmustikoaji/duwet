@@ -102,6 +102,8 @@ https://jenisys.github.io/behave.example/tutorials/tutorial11.html
 
 ## Note
 - Belum ada handle jika muncul pop-up (install desktop apps, dan limitation swipe), maka akan fail setelah muncul pop-up
+Fix on limitation swipe / 12 May 2020
+
 - Login di tinder terdeteksi bot, maka perlu input otp
 - Login with google terdeteksi bot, maka perlu input verify code
 - Login with google pada halaman sign in/up tinder kadang tidak muncul
