@@ -33,6 +33,7 @@ def step_impl(context):
 def step_impl(context):
     buttonAccept = WebDriverWait(context.browser, 10).until(EC.visibility_of_element_located((By.XPATH, obj.buttonAccept)))
     buttonAccept.click()
+    time.sleep(1)
 
 @when('I click the sign in with google')
 def step_impl(context):
@@ -92,7 +93,7 @@ def step_impl(context):
     googleText = google.text
     if "LOG IN WITH GOOGLE" in googleText:
         google.click()
-        time.sleep(2)
+        time.sleep(3)
         window_before = context.browser.current_window_handle
         window_after = context.browser.window_handles[1]
         context.browser.switch_to_window(window_after)
@@ -130,6 +131,7 @@ def step_impl(context):
 @when('I click the Like button')
 def step_impl(context):
     keepGoing = True
+    limit = True
     swipe = 0
     while keepGoing:
         time.sleep(1)
@@ -139,18 +141,25 @@ def step_impl(context):
             context.browser.refresh()
             keepGoing = True
         except TimeoutException:
-            buttonLike = WebDriverWait(context.browser, 3).until(EC.element_to_be_clickable((By.XPATH, obj.buttonLike)))
-            #context.browser.find_element_by_xpath(obj.buttonLike).click()
             try:
-                buttonLike.click()
-                swipe = swipe + 1
-                print(swipe)
-                keepGoing = True
-            except ElementClickInterceptedException:
-                if context.browser.find_element_by_xpath(obj.ModalUnlimited).is_displayed():
-                    webdriver.ActionChains(context.browser).send_keys(Keys.ESCAPE).perform()
-                    print("you're out of like")
+                buttonLike = WebDriverWait(context.browser, 3).until(EC.element_to_be_clickable((By.XPATH, obj.buttonLike)))
+                #context.browser.find_element_by_xpath(obj.buttonLike).click()
+                try:
+                    ciwik = context.browser.find_element_by_xpath(obj.profileName).text
+                    buttonLike.click()
+                    swipe = swipe + 1
+                    if (limit is True):
+                        print(ciwik+" | "+str(swipe))
                     keepGoing = True
+                except ElementClickInterceptedException:
+                    if context.browser.find_element_by_xpath(obj.ModalUnlimited).is_displayed():
+                        webdriver.ActionChains(context.browser).send_keys(Keys.ESCAPE).perform()
+                        print("you're out of like")
+                        limit = False
+                        keepGoing = True
+            except TimeoutException:
+                context.browser.refresh()
+                keepGoing = True
         except NoSuchElementException:
             context.browser.refresh()
             keepGoing = True

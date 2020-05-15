@@ -21,3 +21,4 @@ class object_repository:
     buttonAddHome       = '//button[@data-testid="addToHomeScreen"]'
     buttonNoThanks      = '//button[contains(text(), "No Thanks")]'
     ModalUnlimited      = '//div[@class="modal-zoom-in StretchedBox CenterAlign Z(1)"]'
+    profileName         = '//div[@class="D(f) Ai(b) Ov(h) Maw(80%)"]'
