@@ -44,5 +44,6 @@ def before_all(context):
 
 def after_all(context):
     # cleanup after tests run
-    # time.sleep(360)
+    if os.getenv("PAUSE_ERROR") is True:
+        time.sleep(360)
     context.browser.quit()

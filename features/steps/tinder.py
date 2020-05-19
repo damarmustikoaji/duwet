@@ -134,7 +134,7 @@ def step_impl(context):
     limit = True
     swipe = 0
     while keepGoing:
-        time.sleep(1)
+        # time.sleep(1)
         try:
             keepSwiping = WebDriverWait(context.browser, 3).until(EC.visibility_of_element_located((By.XPATH, obj.keepSwiping)))
             #keepSwiping = context.browser.find_element_by_xpath(obj.keepSwiping)
